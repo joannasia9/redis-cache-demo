@@ -32,7 +32,7 @@ open class AlbumRepository {
         return albums.first { it.title?.trim()?.lowercase() == title.trim().lowercase() }
     }
 
-    @Cacheable(cacheNames = ["songsCache"], keyGenerator = "albumKeyGenerator")
+    @Cacheable(cacheNames = ["songsCache"], key = "#title.toUpperCase()")
     open fun getSongsByAlbumTitle(title: String): List<Song> {
         print("getSongsByAlbumTitle repository call.\n")
         return albums.first { it.title?.trim()?.lowercase() == title.trim().lowercase() }.songs
